@@ -1,0 +1,64 @@
+app-id: com.stremio.Stremio
+runtime: org.freedesktop.Platform
+runtime-version: '18.08'
+branch: stable
+sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: stable
+command: stremio-wrapper
+separate-locales: false
+finish-args:
+- --share=ipc
+- --share=network
+- --device=all
+- --socket=x11
+- --socket=pulseaudio
+- --filesystem=home
+- --persist=.pki/nssdb:rw
+- --talk-name=org.freedesktop.Notifications
+modules:
+- name: libjack
+  buildsystem: simple
+  build-commands:
+    - ./waf configure --prefix=/app
+    - ./waf build
+    - ./waf install
+  sources:
+  - type: archive
+    url: https://github.com/jackaudio/jack2/releases/download/v1.9.12/jack2-1.9.12.tar.gz
+    sha256: deefe2f936dc32f59ad3cef7e37276c2035ef8a024ca92118f35c9a292272e33
+- shared-modules/udev/udev-175.json
+- name: libusb
+  sources:
+    - type: archive
+      url: https://github.com/libusb/libusb/archive/v1.0.22.tar.gz
+      sha256: 3500f7b182750cd9ccf9be8b1df998f83df56a39ab264976bdb3307773e16f48
+- name: stremio
+  buildsystem: simple
+  cleanup:
+  - squashfs-root
+  sources:
+  - type: file
+    only-arches:
+    - x86_64
+    url: https://dl.strem.io/linux/v4.4.10/Stremio+4.4.10.appimage
+    sha256: 082ea3113a15a4d93dde2c58b6b3bcddb32f0937b75acde06a43cf27f6122aaa
+  - type: script
+    dest-filename: stremio-wrapper
+    commands:
+    - export LD_PRELOAD=/app/lib/libnss3.so
+    - exec /app/stremio/stremio
+  build-commands:
+  - chmod +x Stremio+4.4.10.appimage
+  - ./Stremio+4.4.10.appimage --appimage-extract
+
+  - mkdir /app/stremio
+  - cp -r squashfs-root/* /app/stremio/
+  - install stremio-wrapper /app/bin/
+
+  - mkdir -p /app/share/icons/hicolor/512x512/apps/
+  - cp squashfs-root/stremio.png /app/share/icons/hicolor/512x512/apps/com.stremio.Stremio.png
+
+  - mkdir -p /app/share/applications
+  - install -Dm644 squashfs-root/stremio.desktop /app/share/applications/com.stremio.Stremio.desktop
+  - desktop-file-edit --set-key=Exec --set-value='stremio-wrapper %U' --set-key=Icon --set-value='com.stremio.Stremio' /app/share/applications/com.stremio.Stremio.desktop
