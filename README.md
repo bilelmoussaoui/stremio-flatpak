@@ -10,7 +10,9 @@ Stremio Flatpak package (WIP)
 
 ## How to build:
 1 - Install Flatpak & flatpak-builder
+
 2 - Add Flathub's remote
+
 3 - Install freedesktop's runtime
 
 ```bash
