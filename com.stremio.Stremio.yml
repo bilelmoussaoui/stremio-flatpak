@@ -1,6 +1,6 @@
 app-id: com.stremio.Stremio
 runtime: org.freedesktop.Platform
-runtime-version: '18.08'
+runtime-version: '19.08'
 branch: stable
 sdk: org.freedesktop.Sdk
 base: org.electronjs.Electron2.BaseApp
@@ -25,14 +25,14 @@ modules:
     - ./waf install
   sources:
   - type: archive
-    url: https://github.com/jackaudio/jack2/releases/download/v1.9.12/jack2-1.9.12.tar.gz
-    sha256: deefe2f936dc32f59ad3cef7e37276c2035ef8a024ca92118f35c9a292272e33
-- shared-modules/udev/udev-175.json
+    url: https://github.com/jackaudio/jack2/releases/download/v1.9.14/v1.9.14.tar.gz
+    sha256: a20a32366780c0061fd58fbb5f09e514ea9b7ce6e53b080a44b11a558a83217c
+- shared-modules/gudev/gudev.json
 - name: libusb
   sources:
     - type: archive
-      url: https://github.com/libusb/libusb/archive/v1.0.22.tar.gz
-      sha256: 3500f7b182750cd9ccf9be8b1df998f83df56a39ab264976bdb3307773e16f48
+      url: https://github.com/libusb/libusb/releases/download/v1.0.23/libusb-1.0.23.tar.bz2
+      sha256: db11c06e958a82dac52cf3c65cb4dd2c3f339c8a988665110e0d24d19312ad8d 
 - name: stremio
   buildsystem: simple
   cleanup:
@@ -43,6 +43,10 @@ modules:
     - x86_64
     url: https://dl.strem.io/linux/v4.4.10/Stremio+4.4.10.appimage
     sha256: 082ea3113a15a4d93dde2c58b6b3bcddb32f0937b75acde06a43cf27f6122aaa
+  - type: file
+    path: com.stremio.Stremio.appdata.xml
+  - type: file
+    path: com.stremio.Stremio.svg
   - type: script
     dest-filename: stremio-wrapper
     commands:
@@ -57,7 +61,7 @@ modules:
   - install stremio-wrapper /app/bin/
 
   - mkdir -p /app/share/icons/hicolor/512x512/apps/
-  - cp squashfs-root/stremio.png /app/share/icons/hicolor/512x512/apps/com.stremio.Stremio.png
+  - cp com.stremio.Stremio.svg /app/share/icons/hicolor/512x512/apps/com.stremio.Stremio.svg
 
   - mkdir -p /app/share/applications
   - install -Dm644 squashfs-root/stremio.desktop /app/share/applications/com.stremio.Stremio.desktop

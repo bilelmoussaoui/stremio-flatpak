@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.stremio.Stremio</id>
+  <launchable type="desktop-id">com.stremio.Stremio.desktop</launchable>
+  <name>Stremio</name>
+  <developer_name>Stremio</developer_name>
+  <summary>Discover, organize and watch video from all kind of sources on any device that you own.</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPLv3</project_license>
+  <url type="homepage">https://www.stremio.com/</url>
+  <url type="help">https://github.com/Stremio/stremio-shell</url>
+  <description>
+    <p> Stremio is a one-stop hub for video content aggregation. Discover, organize and watch video from all kind of sources on any device that you own.
+	Movies, TV shows, series, live television or web channels like YouTube and Twitch.tv - you can find all this on Stremio.</p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <caption>Stremio Home Screen</caption>
+      <image type="source" width="1280" height="720">https://www.stremio.com/website/features-all.jpg</image>
+    </screenshot>
+    <screenshot>
+      <caption>Stremio Discover Media Page</caption>
+      <image type="source" width="1280" height="720">https://www.stremio.com/website/features-discover.jpg</image>
+    </screenshot>
+    <screenshot>
+      <caption>Stremio Library Page</caption>
+      <image type="source" width="1280" height="720">https://www.stremio.com/website/features-library.jpg</image>
+    </screenshot>
+    <screenshot>
+      <caption>Stremio Schedule Page</caption>
+      <image type="source" width="1280" height="720">https://www.stremio.com/website/features-calendar.jpg</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release date="2018-08-25" version="v4.4.10"/>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-info">moderate</content_attribute>
+    <content_attribute id="social-contacts">intense</content_attribute>
+  </content_rating>
+  <update_contact>bil[dot]elmoussaoui[at]gmail[dot]com</update_contact>
+</component>
